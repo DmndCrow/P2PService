@@ -3,4 +3,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-port = int(os.getenv('SOCKET_PORT', 6789))
+host = os.getenv('HOST', 'localhost')
+port = int(os.getenv('PORT', 6789))
+
+db_name = os.getenv('DB_NAME', 'my_file.db')
