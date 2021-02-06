@@ -37,6 +37,7 @@ def init_server_connection():
 
 
 def listen_to_other_clients(server, port):
+    log(port)
     log(f'Wait for connections on port {port}')
 
     # wait for connection from another clients that want to download file
@@ -98,7 +99,7 @@ def main():
         elif action.lower() in ['2', 'share']:
             # make sure path exists
             while True:
-                path = input('Please enter absolute path to sharing folder\n')
+                path = input('Please enter absolute path of sharing folder\n')
                 if os.path.exists(path):
                     break
 
