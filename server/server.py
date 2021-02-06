@@ -1,7 +1,12 @@
 import socket
 import sys
-import random
 import _thread
+import os
+
+# To make sure that we can see functions from utils folder
+current_dir = os.path.dirname(os.path.realpath(__file__))
+parent_dir = os.path.dirname(current_dir)
+sys.path.append(parent_dir)
 
 from utils import constants
 from utils.functions import log
@@ -18,13 +23,9 @@ def init_server_connection():
         sys.exit(-1)
 
     # assign port that is not in use
-    while True:
-        port = random.randint(0, 65535)
-        try:
-            server.bind(('', port))
-            break
-        except socket.error as e:
-            continue
+    port = constants.port
+    server.bind(('', port))
+
     return server, port
 
 
@@ -34,7 +35,7 @@ def main():
     log(f'Server is running on port {port}')
 
     # listen for incoming connections
-    server.listen(5)
+    server.listen(50)  # Accepts up to 50 connections.
 
     # start database
     db = DB(constants.db_name)
